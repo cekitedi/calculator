@@ -7,13 +7,14 @@ package calculator;
  */
 class Calculator {
     String calculate(String[] expression) {
-        System.out.println(expression[0]);
-        System.out.println(expression[1]);
-        System.out.println(expression[2]);
-        double a = Double.parseDouble(expression[0]);
+        System.out.println("Length : " + expression.length);
+        //System.out.println(expression[0]);
+        //System.out.println(expression[1]);
+       // System.out.println(expression[2]);
+     /*
+       double a = Double.parseDouble(expression[0]);
         //int b = Integer.parseInt(expression[1]);
         double b = Double.parseDouble(expression[2]);
-
         double res = 0;
         switch (expression[1]) {
             case "+":                res = a + b;                break;
@@ -22,7 +23,6 @@ class Calculator {
             case "/":                res = a / b;                break;
             //default:                 res = 0;
         }
-        System.out.println("Length : " + expression.length);
         if (expression.length<4) {
             return String.valueOf(res);
         } // if expression.length
@@ -42,10 +42,29 @@ class Calculator {
                 case "-/":                  res = a - (b / c);                    break;
                 case "/+":                  res = (a / b) + c;                    break;
                 case "/-":                  res = (a / b) - c;                    break;
-
                 // default:                 res = 0;
             }
-        return String.valueOf(res);
+            */
+        //1+3-5-8...
+        double res = Double.parseDouble(expression[0]);
+        // kazdij vtoroj iz massiva
+        for(int i = 1; i<expression.length; i+=2){
+            System.out.println(expression[i]);
+            String opr = expression[i];
+            double a = Double.parseDouble(expression[i-1]);
+            double b = Double.parseDouble(expression[i+1]);
+            //expression.
+            switch (expression[i]) {
+                case "+":                res   += b;                break;
+                case "-":                res   -= b;                break;
+                case "*":                res   *= b;                break;
+                case "/":                res   /= b;                break;
+                //default:                 res = 0;
+            }
+            System.out.println("Rezult : " +res);
+      }
+
+       return String.valueOf(res);
     }
 
 }
