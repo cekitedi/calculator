@@ -6,7 +6,6 @@ package calculator;
  * @since 1.0
  */
 class Calculator {
-
     String calculate(String[] expression) {
         System.out.println(expression[0]);
         System.out.println(expression[1]);
@@ -24,16 +23,28 @@ class Calculator {
             //default:                 res = 0;
         }
         System.out.println("Length : " + expression.length);
-        if (expression.length>3) {
+        if (expression.length<4) {
+            return String.valueOf(res);
+        } // if expression.length
             double c = Double.parseDouble(expression[4]);
-            switch (expression[3]) {
-                case "+":                    res = res + c;                    break;
-                case "-":                    res = res - c;                    break;
-                case "*":                    res = res * c;                    break;
-                case "/":                    res = res / c;                    break;
+            String op1 = expression[1];
+            String op2 = expression[3];
+            switch (op1 +op2) {
+                case "++":                  res = a + b + c;                    break;
+                case "--":                  res = a - b - c;                    break;
+                case "**":                  res = a * b * c;                    break;
+                case "//":                  res = a / b / c;                    break;
+                case "+*":                  res = a + (b * c);                    break;
+                case "-*":                  res = a - (b * c);                    break;
+                case "*+":                  res = (a * b) + c;                    break;
+                case "*-":                  res = (a * b) - c;                    break;
+                case "+/":                  res = a + (b / c);                    break;
+                case "-/":                  res = a - (b / c);                    break;
+                case "/+":                  res = (a / b) + c;                    break;
+                case "/-":                  res = (a / b) - c;                    break;
+
                 // default:                 res = 0;
             }
-        } // if expression.length
         return String.valueOf(res);
     }
 
