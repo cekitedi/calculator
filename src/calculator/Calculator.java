@@ -10,12 +10,36 @@ import java.util.List;
  */
 class Calculator {
     String calculate(String[] expression) {
+        List<String> tmp = new ArrayList<>(List.of(expression));// perekacivaem spisok v list
+        System.out.println("Start list: " +tmp);
+        int brOpenIdx = -1;
+        do {
+            brOpenIdx = -1;
+            for (int i = 0; i < tmp.size(); i++) {
+                System.out.println(expression[i]);
+                String a = tmp.get(i);
+                if (a.equals("(")) {
+                    brOpenIdx = i;
+                } else if (a.equals(")")) {
+                    var inBr = tmp.subList(brOpenIdx + 1, i);
+                    var result = calculate(inBr);
+                    tmp.subList(brOpenIdx, i + 1).clear(); //delete elements from brOpenIdx to i+1
+                    tmp.add(brOpenIdx, result);
+                    System.out.println(" list: " +tmp);
+                    break;
+                }
+            }
+            System.out.println(" for list: " +tmp);
+        } while (brOpenIdx != -1);
+        System.out.println("End list: "+ tmp);
+        return calculate(tmp);
+    }
+
+        String calculate(List<String> expression) {
         //System.out.println("Length : " + expression.length);
         //System.out.println(expression[0]);
-        //System.out.println(expression[1]);
-       // System.out.println(expression[2]);
-     /*
-       double a = Double.parseDouble(expression[0]);
+      /*
+        double a = Double.parseDouble(expression[0]);
         //int b = Integer.parseInt(expression[1]);
         double b = Double.parseDouble(expression[2]);
         double res = 0;
@@ -68,14 +92,14 @@ class Calculator {
             System.out.println("Rezult : " +res);
       }*/
         List<String> tmp = new ArrayList<>();
-        double a = Double.parseDouble(expression[0]);
+        double a = Double.parseDouble(expression.get(0));
 
-        for(int i = 1; i<expression.length; i+=2){
-            System.out.println(expression[i]);
-            String opr = expression[i];
-            double b = Double.parseDouble(expression[i+1]);
+        for(int i = 1; i<expression.size(); i+=2){
+            System.out.println(expression.get(i));
+            String opr = expression.get(i);
+            double b = Double.parseDouble(expression.get(i+1));
             //expression.
-            switch (expression[i]) {
+            switch (opr)  {
                 case "+":
                 case "-":
                     tmp.add(String.valueOf(a));
@@ -92,7 +116,7 @@ class Calculator {
         System.out.println(tmp);
         double res =Double.parseDouble(tmp.get(0));
         for(int i = 1; i<tmp.size(); i+=2){
-            System.out.println(expression[i]);
+            System.out.println(expression.get(i));
             String op = tmp.get(i);
             double b = Double.parseDouble(tmp.get(i+1));
             //expression.
